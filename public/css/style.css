@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* Login page */
+.web-form {
+    background: #e5e1eb;
+}
+
+.web-form form {
+    padding: 20px;
+}
+
+.loginwrapper {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+
+.regwrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+
+.forgetpswdwrapper {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+
+.web-form label {
+    text-transform: capitalize;
+}
+
+.web-form label,
+.forgot-pass,
+.btn {
+    font-size: 15px;
+}
+
+.web-form input[type="text"],.web-form input[type="number"] ,
+.login-form input[type="password"] {
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid #e4e4e4;
+}
+
+.themebg {
+    background: #326bb0;
+}
+
+.btnlog {
+    background: #326bb0;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    padding: 10px 50px;
+    transition: all 350ms ease-in-out;
+    -webkit-transition: all 350ms ease-in-out;
+    -moz-transition: all 350ms ease-in-out;
+    border: none;
+}
+
+.btnlog:hover {
+    background: #1977e9;
+}
+
+

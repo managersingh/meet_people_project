@@ -1,80 +1,641 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+   <head>
+      <title>Meet Away</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <link rel="stylesheet" href="{{ asset('public/front/css/bootstrap.min.css') }}">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
+	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+	  <style>
+  section#network_section4 .owl-nav button.owl-prev, section#network_section4 .owl-carousel button.owl-dot {
+         background: #00000087;
+         color: #fff;
+         border: none;
+         font: inherit;
+         width: 40px;
+         height: 40px;
+         font-size: 18px;
+         border-radius: 0;
+         box-shadow: 0px 4px 8px #ccc;
+         top: 40%;
+         }
+         section#network_section4 .owl-carousel .owl-nav button.owl-next, section#network_section4 .owl-carousel button.owl-dot {
+         background: #00000087;
+         color: #fff;
+         border: none;
+         font: inherit;
+         width: 40px;
+         height: 40px;
+         font-size: 18px;
+         border-radius: 0;
+         box-shadow: 0px 4px 8px #ccc;
+         top: 40%;
+         }
+         section#network_section4 button.owl-prev {
+         position: absolute;
+         left: -55px;
+         }
+         section#network_section4 button.owl-next {
+         position: absolute;
+         right: -55px;   
+         }
+         button:focus {
+         outline: none!important;
+         }
+         .button-box p {
+         font-size: 14px;
+         position: relative;
+         top: 4px;
+         color: #fff;
+         }
+         .button-box {
+         background-image: url('public/front/images/bg-icon-2.png');
+         background-position: center;
+         background-size: contain;
+         background-repeat: no-repeat;
+         margin: auto;
+         height: 33px;
+         }
+         .box-shadow1 {
+         box-shadow: 0px 4px 8px #ccc;
+         }
+         section#network_section4 .blog_item {
+         padding: 15px 0px;
+         }
+         .box-shadow1 h2 {
+         font-size: 18px;
+         font-weight: 700;
+         text-align: center;
+         margin-top: 15px;
+         }
+         .button-box {
+         text-align: center;
+         }
+         .circle-image img {
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;      		
+         }
+         .test-img {
+         width: 60px;
+         height: 60px;
+         border-radius: 50%;
+         box-shadow: 0px 4px 10px #ccc;
+         display: inline-block;
+         text-align: center;
+         }
+         .circle-image h3 {
+         font-size: 22px;
+         font-weight: 700;
+         position: relative;
+         left: 20px;
+         top: 10px;
+         }
+         .checked {
+         color: #f5b011;
+         }
+         img.com-img {
+         width: 100%;
+         height: auto;
+         }
+         section#footer h6 {
+         color: #fff;
+         font-weight: 800;
+         }
+         section#footer hr {
+         margin-left: 0px;
+         }
+         section#footer a {
+         color: #fff;
+         }
+         i.fa.fa-hand-o-right {
+         margin-right: 5px;
+         }
+         .tm-footer-logo img {
+         margin-bottom: 20px;
+         }
+         section#footer ul {
+         padding: 0px;
+         list-style: none;
+         }
+         input.form-control {
+         border-radius: 0px;
+         }
+         section#footer .btn-theme-bx {
+         margin-top: 10px;
+         }
+         i.fa.fa-facebook {
+         background: #366db1;
+         }
+         i.fa.fa-linkedin {
+         background: #007ab9;
+         }
+         i.fa.fa-twitter {
+         background: #02b1ec;
+         }
+         i.fa.fa-youtube {
+         background: #f12f2f;
+         }
+         i.fa.fa-google-plus {
+         background: #f44336;
+         }
+         ul.tm-footer-social-icon i {
+         width: 30px;
+         height: 30px;
+         background: #fff;
+         text-align: center;
+         border-radius: 50%;
+         padding-top: 7px;
+         color: #fff;
+         }
+         section#footer p {
+         color: #fff;
+         }
+         ul.tm-footer-social-icon {
+         list-style: none;
+         text-align: left;
+         }
+         ul.tm-footer-social-icon li {
+         display: inline-block;
+         margin: 0px 5px;
+         }
+         a:hover {
+         text-decoration: none!important;
+         }
+         .panel-heading .accordion-toggle:after {
+         /* symbol for "opening" panels */
+         font: normal normal normal 14px/1 FontAwesome;
+         content: "\f068 ";    /* adjust as needed, taken from bootstrap.css */
+         float: right;        /* adjust as needed */
+         color: grey;         /* adjust as needed */
+         }
+         .panel-heading .accordion-toggle.collapsed:after {
+         /* symbol for "collapsed" panels */
+         content: "\f067";    /* adjust as needed, taken from bootstrap.css */
+         }
+         .panel.panel-default {
+         /* border: 1px solid #0f5ba9; */
+         box-shadow: 0px 1px 4px #0f5ba9bf;
+         margin-top: 15px;
+         padding: 10px;
+         }
+         section#network_section6 h4 {
+         font-size: 18px;
+         color: #000;
+         }
+         section#network_section6 h4 a {
+         color: #000;
+         }
+         .image-faq img {
+         width: 100%;
+         border-top-right-radius: 100px;
+         border-bottom-left-radius: 100px;
+         }
+         .image-faq {
+         width: 400px;
+         margin: auto;
+         }
+         .viewall-boxs.position-relative {
+         width: 180px;
+         background: #fff;
+         padding: 15px;
+         border-radius: 50px;
+         margin-left: auto;
+         margin-right: auto;
+         }
+         section#network_section5 h2 {
+         font-size: 38px;
+         color: #fff;
+         font-weight: 700;
+         }
+         .circle-image {
+         padding-left: 35px;
+         padding-bottom: 65px;
+         background:#fff;
+         }
+         section#network_section5 {
+         background-image: url('public/front/images/bg-img-2.jpg');
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         padding: 40px 0px;
+         }
+         div#myCarousel .col-lg-4.col-md-6 {
+         padding: 0px;
+         }
+         .test-bg {
+         background-image: url('public/front/images/testimonial-bg.png');
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         padding: 45px 25px;
+         }
+         section#network_section7 {
+         background-image: url('public/front/images/bg-img-3.jpg');
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         padding: 60px 0px;
+         }
+         .viewall-box.position-relative {
+         width: 180px;
+         background: #fff;
+         padding: 15px;
+         border-radius: 50px;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 30px;
+         box-shadow: 0px 4px 10px #ccc;
+         }
+         .viewall-box.position-relative a {
+         color: #326bb0;
+         }
+         i.fa.fa-long-arrow-right.icon2 {
+         width: 40px;
+         height: 40px;
+         color: #fff;
+         background: #326bb0;
+         border-radius: 50%;
+         text-align: center;
+         padding-top: 11px;
+         position: absolute;
+         right: 8px;
+         top: 7px;
+         }
+         .events-box h2 {
+         font-size: 18px;    
+         }
+         .events-box {
+         padding: 10px;
+         height: 80px;
+         }
+         .icons1 i {
+         margin-right: 5px;
+         color: #326bb0;
+         }
+         .icons1 {
+         display: flex;
+         padding: 10px;
+         font-size: 14px;
+         }
+         .calendar, .clock {
+         width: 50%;
+         }
+         .net-heading h2 {
+         font-weight: 400;
+         letter-spacing: 1.5px;
+         }
+         span.span-head {
+         font-weight: 800;
+         }
+         section#network_section3 {
+         background-image: url('public/front/images/bg-img-1.jpg');
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         }
+         footer.tm-footer {
+         padding-top: 60px; 
+         }
+         .tm-copyright {
+         padding: 1px;
+         }
+         section#network_section2,  section#network_section3, section#network_section4,section#network_section6, section#network_section8 {
+         padding: 60px 0px;
+         }
+         .net-heading {
+         margin-bottom: 35px;
+         }
+         .comm-text {
+         text-align: center;
+         padding: 5px;
+         }
+         .btn-theme-bx {
+         text-align: center;
+         width: 100%;
+         background: #326bb0;
+         padding: 8px;
+         }
+         .btn-theme-bx a {
+         color: #fff;
+         }
+         hr.border-blue-1 {
+         height: 5px;
+         background: #326bb0;
+         width: 80px;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 10px;
+         margin-bottom: 2px;
+         }
+         hr.border-blue-2 {
+         height: 2px;
+         background: #326bb0;
+         width: 80px;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 0px;
+         }
+         .comm-text h2 {
+         font-size: 18px;
+         font-weight: 700;
+         text-align: center;
+         margin-top: 12px;
+         }
+         .box-shadow {
+         box-shadow: 0px 4px 10px #ccc;
+         background:#fff;
+         }
+         section#network_section1 {
+         padding: 60px 0px;
+         }
+         form.search-form {
+         margin-top: 40px;
+         }
+         .icon-down {
+         background-image: url('public/front/images/bg-icon-1.png');
+         width: 80px;
+         margin: auto;
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         background-size: cover;
+         background-repeat: no-repeat;
+         text-align: center;
+         }
+         .text-center.text-bg {
+         margin-top: 150px;
+         margin-bottom: 100px;
+         }
+         input.form-control.form-new {
+         width: 400px;
+         height: 50px;
+         border-radius: 0px;
+         display: inline-block;
+         }
+         a.btn-theme {
+         padding: 15px 25px;
+         background: #326bb0;
+         color: #fff;
+         }
+         section#network_section1 h1 {
+         font-size: 62px;
+         color: #fff;
+         font-weight: 300;
+         letter-spacing: 1.5px;
+         }
+         span.text-bold {
+         font-weight: 700;
+         }
+         header.header {
+         background: #000000a6;
+         width: 100%;
+         position: absolute;
+         left: 0;
+         top: 0;
+         z-index: 9999;
+         right: 0;
+         }
+         .header-nav {
+         width: 80%;
+         margin: auto;
+         }
+         ul.nav-list li {
+         list-style: none;
+         display: inline-block;
+         text-align: right;
+         }
+         .navbar-nav {
+         width: 100%;
+         }
+         ul.nav-list {
+         width: 100%;
+         text-align: right;
+         }
+         ul.nav-list li a {
+         color: #fff!important;
+         }
+         a.nav-item.nav-link.btn-nav-ink {
+         background: #326bb0;
+         border-radius: 50px;
+         padding: 7px 15px;
+         position: relative;
+         width: 180px;
+         text-align: left;
+         }
+		 
+		 
+		 a.nav-item.nav-link.btn-nav-ink.loginfront {
+         background: #326bb0;
+         border-radius: 50px;
+         padding: 7px 15px;
+         position: relative;
+         width: 100px;
+         text-align: left;
+         }
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+         i.fa.icon1 {
+         background: #fff;
+         height: 30px;
+         width: 30px;
+         border-radius: 90px;
+         text-align: center;
+         color: #326bb0;
+         padding: 7px;
+         position: absolute;
+         right: 5px;
+         top: 4px;
+         }
+         section#network_section1 {
+         background-image: url('public/front/images/hero-1.jpg');
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         }
+		 
+      </style>
+      
+   </head>
+   <body>
+      <header class="header">
+         <div class="header-nav">
+            <nav class="navbar navbar-expand-md navbar-light bg-color1">
+               <div class="logo">
+                  <a href="{{url('/')}}" class="navbar-brand"><img src="<?php echo url('public/front/images/logo1.png'); ?>" style="height: 54px;
+    width: 258px;"></a>
+               </div>
+               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                  <div class="navbar-nav">
+                     <ul class="nav-list">
+                        <li><a href="{{url('/')}}" class="nav-item nav-link active">HOME</a></li>
+                        <li><a href="#" class="nav-item nav-link">COMMUNITIES</a></li>
+                        <li><a href="#" class="nav-item nav-link">COACH</a></li>
+                        <li><a href="#" class="nav-item nav-link">FAQ</a></li>
+                        <li><a href="#" class="nav-item nav-link">TETIMONIAL</a></li>
+                        <li><a href="{{url('contactUs')}}" class="nav-item nav-link">CONTACT US</a></li>
+                        <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
+						<li><a href="{{url('/login')}}" class="nav-item nav-link btn-nav-ink loginfront">Login<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
+                     
+					</ul>
+                  </div>
+               </div>
+            </nav>
+         </div>
+      </header>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+@yield('content')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+<section id="footer">
+         <footer class="tm-footer" style="background-image: url('public/front/images/footer-bg.jpg');" title="Footer Background">
+            <div class="tm-footer-contact-details">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-4">
+                        <div class="tm-footer-logo-social-sec">
+                           <div class="tm-footer-logo">
+                              <a href="#"><img src=<?php echo url('public/front/images/logo1.png'); ?> style="width: 251px;" alt="NAW Logo"></a>
+                           </div>
+                           <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.  </p>
+                           <ul class="tm-footer-social-icon">
+                              <li class="tm-footer-icon-facebook"><a href="" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                              <li class="tm-footer-icon-twitter"><a href="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="tm-footer-quick-links">
+                           <div class="tm-footer-quick-links-header">
+                              <h6>Quick Links</h6>
+                              <hr class="border-blue-1">
+                              <hr class="border-blue-2">
+                           </div>
+                           <ul class="footer_custom">
+                              <li><a target="_blank" href=""><i class="fa fa-hand-o-right"></i>Home</a></li>
+                              <li><a href=""><i class="fa fa-hand-o-right"></i>Communities</a></li>
+                              <li><a href=""><i class="fa fa-hand-o-right"></i>Coach</a></li>
+                              <li><a href=""><i class="fa fa-hand-o-right"></i>FAQ</a></li>
+                              <li><a href=""><i class="fa fa-hand-o-right"></i>Testimonial</a></li>
+                              <li><a href=""><i class="fa fa-hand-o-right"></i>Contact Us</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="tm-footer-quick-links">
+                           <div class="tm-footer-quick-links-header">
+                              <h6>Our Communities</h6>
+                              <hr class="border-blue-1">
+                              <hr class="border-blue-2">
+                           </div>
+                           <ul class="footer_custom">
+                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Business Growth </a></li>
+                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Professional Development</a></li>
+                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>How to build a relationhips</a></li>
+                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Professional Development</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="tm-footer-quick-links">
+                           <div class="tm-footer-quick-links-header">
+                              <h6>Newsletter SignUp</h6>
+                              <hr class="border-blue-1">
+                              <hr class="border-blue-2">
+                           </div>
+                           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                           <input type="text" name="" class="form-control" placeholder="Enter Your Email">
+                           <div class="btn-theme-bx">
+                              <a href="" class="">Submit Now</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-</body>
+            <hr style="background: #fff;">
+            <div class="tm-copyright">
+               <div class="container">
+                  <div class="text-center">
+                     <p class="demo">© 2020 Meet Away Website. All rights reserved.</p>
+                  </div>
+               </div>
+            </div>
+         </footer>
+      </section>
+     
+	  <script src="{{ asset('public/front/js/bootstrap.min.js') }}"></script>
+	  <script src="{{ asset('public/front/js/jquery-3.3.1.js') }}"></script>
+	  <script src="{{ asset('public/front/js/owl.carousel.js') }}"></script>
+    
+      <script type="text/javascript">
+         $('.owl-carousel2').owlCarousel({
+            loop:true,
+            margin:10,
+            dots:false,
+            nav:true,
+            autoplay:true,   
+            smartSpeed: 3000, 
+            autoplayTimeout:7000,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:3
+                }
+            }
+         })
+         
+         $('.owl-carousel1').owlCarousel({
+            loop:true,
+            margin:10,
+            dots:false,
+            nav:true,
+            autoplay:true,   
+            smartSpeed: 3000, 
+            autoplayTimeout:7000,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:4
+                }
+            }
+         })
+      </script>
+	    <script>
+    $(document).ready(function(){
+      //Remove flash message
+        setTimeout(function() {
+            $('#successMessage').fadeOut('slow');
+            $('#errorMessage').fadeOut('slow');
+            $("#displayErrorMessage").fadeOut('slow');
+        }, 5000); // <-- time in milliseconds
+      });
+  </script>
+    <script>
+    $(document).ready(function(){
+      //Remove flash message
+        setTimeout(function() {
+            $('#successMessage').fadeOut('slow');
+            $('#errorMessage').fadeOut('slow');
+            $("#displayErrorMessage").fadeOut('slow');
+        }, 5000); // <-- time in milliseconds
+      });
+  </script>
+   </body>
 </html>
