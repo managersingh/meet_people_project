@@ -25,4 +25,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function(){
     Route::get('video_chat', 'VideoChatController@index');
     Route::post('auth/video_chat', 'VideoChatController@auth');
+    Route::get('/logout','HomeController@logout')->name('logout');
+    Route::post('/edit-profile', 'HomeController@editProfile');
+    Route::post('/upload-image', 'HomeController@uploadImage');
   });
