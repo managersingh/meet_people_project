@@ -3,10 +3,12 @@
       <title>Meet Away</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
 	  <link rel="stylesheet" href="{{ asset('public/front/css/bootstrap.min.css') }}">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+
 	  <style>
   section#network_section4 .owl-nav button.owl-prev, section#network_section4 .owl-carousel button.owl-dot {
          background: #00000087;
@@ -476,10 +478,15 @@
                         <li><a href="#" class="nav-item nav-link">COMMUNITIES</a></li>
                         <li><a href="#" class="nav-item nav-link">COACH</a></li>
                         <li><a href="#" class="nav-item nav-link">FAQ</a></li>
-                        <li><a href="#" class="nav-item nav-link">TETIMONIAL</a></li>
+                        <li><a href="#" class="nav-item nav-link">TESTIMONIAL</a></li>
                         <li><a href="{{url('contactUs')}}" class="nav-item nav-link">CONTACT US</a></li>
-                        <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
-						<li><a href="{{url('/login')}}" class="nav-item nav-link btn-nav-ink loginfront">Login<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
+                        @if(Auth::check())
+                        <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#editModal">Edit Profile</a></li>
+                        <li><a href="{{url('/logout')}}" class="nav-item nav-link">Logout</a></li>
+                              @else
+                              <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
+                              <li><a href="{{url('/login')}}" class="nav-item nav-link btn-nav-ink loginfront">Login<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
+                              @endif
                      
 					</ul>
                   </div>
@@ -489,6 +496,7 @@
       </header>
 
 @yield('content')
+
 
 <section id="footer">
          <footer class="tm-footer" style="background-image: url('public/front/images/footer-bg.jpg');" title="Footer Background">
@@ -569,11 +577,78 @@
             </div>
          </footer>
       </section>
-     
+     <!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="" id="editProfileForm">
+      <div class="modal-body">
+         <div class="row">
+               <div class="form-group">
+                  <input name="userImage" id="userImage" type="file" class="inputFile" />
+               </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
+               </div>
+            </div>
+            <div class="col-md-6">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="exampleInputEmail2" name="last_name" aria-describedby="emailHelp" placeholder="Last Name" value="{{Auth::user()->last_name}}">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <input type="text" class="form-control" id="exampleInputEmail3" name="title" placeholder="Title" value="{{Auth::user()->title}}"> 
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <input type="text" class="form-control" id="exampleInputEmail4" name="company" placeholder="Company" value="{{Auth::user()->company}}">
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+                  <input type="text" class="form-control" id="exampleInputEmail5" name="city" placeholder="Your City" value="{{Auth::user()->city}}">
+               </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="short_bio" placeholder="Short Bio">{{Auth::user()->short_bio}}</textarea>
+               </div>
+            </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="registerUser()">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{{asset('public/front/js/jquery-3.4.1.min.js')}}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 	  <script src="{{ asset('public/front/js/bootstrap.min.js') }}"></script>
-	  <script src="{{ asset('public/front/js/jquery-3.3.1.js') }}"></script>
 	  <script src="{{ asset('public/front/js/owl.carousel.js') }}"></script>
-    
       <script type="text/javascript">
          $('.owl-carousel2').owlCarousel({
             loop:true,
@@ -615,7 +690,81 @@
                     items:4
                 }
             }
-         })
+         });
+                  // This function deals with validation of the form fields
+                  $("#editProfileForm").validate({
+               rules: {
+                  first_name:"required",
+                  last_name:"required",
+                  title:"required",
+                  company:"required",
+                  city:"required",
+               }
+            });
+            
+            $("#userImage").change(function(e){
+            var file = e.target.files[0];
+            
+               var form_data = new FormData();
+               form_data.append('file', file);
+
+               for (var key of form_data.entries()) {
+                  console.log(key[0] + ', ' + key[1]);
+               }
+               $.ajax({
+               url: "{{url('/upload-image')}}",
+               type: "post",
+               processData: false,
+               contentType: false,
+               cache: false,
+               data: form_data,
+               enctype: 'multipart/form-data',
+               headers: {
+                  "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+               },
+               beforeSend: function() {
+               },
+               success: function(response) {
+                  if(response.success ==  true){
+console.log('image uploaded');
+                     
+                  }
+               },
+               error:function(error){
+                  alert(error.message);
+               }
+               });
+
+               
+            })
+         //Save user info into DB
+         function registerUser(){
+            if($("#editProfileForm").valid())
+            {
+
+            $.ajax({
+               url: "{{url('/edit-profile')}}",
+               type: "post",
+               data: {data:$("#editProfileForm").serialize()},
+               dataType: "json",
+               headers: {
+                  "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+               },
+               beforeSend: function() {
+               },
+               success: function(response) {
+                  if(response.success ==  true){
+                     $("#editModal").modal('hide');
+                        alert(response.message);
+                     
+                  }
+               },
+               error:function(error){
+                  alert(error.message);
+               }
+               });
+            }
+         }
       </script>
 	    <script>
     $(document).ready(function(){
@@ -638,4 +787,7 @@
       });
   </script>
    </body>
+
+
+
 </html>
