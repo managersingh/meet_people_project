@@ -456,7 +456,9 @@
          background-size: cover;
          background-repeat: no-repeat;
          }
-		 
+		 .hide{
+          display:none !important;
+       }
       </style>
       
    </head>
@@ -481,7 +483,8 @@
                         <li><a href="#" class="nav-item nav-link">TESTIMONIAL</a></li>
                         <li><a href="{{url('contactUs')}}" class="nav-item nav-link">CONTACT US</a></li>
                         @if(Auth::check())
-                        <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#editModal">Edit Profile</a></li>
+                        <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#editModal">EDIT PROFILE</a></li>
+                        <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#feedbackModal">SEND FEEDBACK</a></li>
                         <li><a href="{{url('/logout')}}" class="nav-item nav-link">Logout</a></li>
                               @else
                               <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
@@ -578,6 +581,7 @@
          </footer>
       </section>
      <!-- Edit Modal -->
+@if(Auth::check())
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -597,7 +601,9 @@
         <div class="row">
             <div class="col-md-6">
                <div class="form-group">
-                  <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
+                 
+                     <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="First Name" value="{{Auth::user()->first_name}}">
+                 
                </div>
             </div>
             <div class="col-md-6">
@@ -644,6 +650,52 @@
     </div>
   </div>
 </div>
+@else
+@endif
+@if(Auth::check())
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="feedbackModalLabel"><span id="userName">{{Auth::user()->first_name}},</span>what's on your mind?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="" id="feedbackForm">
+      <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-12">
+               <div class="form-group">
+               <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="short_bio" placeholder="Let us know..."></textarea>
+               </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+            <div class="form-group form-check">
+               <input type="checkbox" class="form-check-input" name="make_anonymous" id="makeAnonymous">
+               <label class="form-check-label" for="exampleCheck1">Make Anonymous</label>
+            </div>
+            </div>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+         
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="feedbackSub" onclick="registerUser()">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+@else
+@endif
 <script src="{{asset('public/front/js/jquery-3.4.1.min.js')}}"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
@@ -765,6 +817,16 @@ console.log('image uploaded');
                });
             }
          }
+
+         $("#makeAnonymous").click(function(){
+            if ($(this).is(':checked')) {
+                  $("#feedbackSub").text('Submit Anonymously');
+                  $("#userName").addClass('hide');
+            }else{
+               $("#feedbackSub").text('Submit');
+               $("#userName").removeClass('hide');
+            }
+         })
       </script>
 	    <script>
     $(document).ready(function(){
