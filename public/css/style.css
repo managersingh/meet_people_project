@@ -9,21 +9,21 @@
 }
 
 .loginwrapper {
-    height: 70vh;
+    height: 94% !important;
     display: flex;
     align-items: center;
 }
 
 
 .regwrapper {
-    height: 100vh;
+    height: 94% !important;
     display: flex;
     align-items: center;
 }
 
 
 .forgetpswdwrapper {
-    height: 60vh;
+     height: 94% !important;
     display: flex;
     align-items: center;
 }
