@@ -28,4 +28,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout','HomeController@logout')->name('logout');
     Route::post('/edit-profile', 'HomeController@editProfile');
     Route::post('/upload-image', 'HomeController@uploadImage');
+    Route::post('/send-feedback', 'HomeController@sendFeedback');
+    Route::get('/account-settings', 'HomeController@accountSettings');
   });
