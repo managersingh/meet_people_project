@@ -10,38 +10,7 @@
 	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
 
 	  <style>
-  section#network_section4 .owl-nav button.owl-prev, section#network_section4 .owl-carousel button.owl-dot {
-         background: #00000087;
-         color: #fff;
-         border: none;
-         font: inherit;
-         width: 40px;
-         height: 40px;
-         font-size: 18px;
-         border-radius: 0;
-         box-shadow: 0px 4px 8px #ccc;
-         top: 40%;
-         }
-         section#network_section4 .owl-carousel .owl-nav button.owl-next, section#network_section4 .owl-carousel button.owl-dot {
-         background: #00000087;
-         color: #fff;
-         border: none;
-         font: inherit;
-         width: 40px;
-         height: 40px;
-         font-size: 18px;
-         border-radius: 0;
-         box-shadow: 0px 4px 8px #ccc;
-         top: 40%;
-         }
-         section#network_section4 button.owl-prev {
-         position: absolute;
-         left: -55px;
-         }
-         section#network_section4 button.owl-next {
-         position: absolute;
-         right: -55px;   
-         }
+ 
          button:focus {
          outline: none!important;
          }
@@ -62,9 +31,7 @@
          .box-shadow1 {
          box-shadow: 0px 4px 8px #ccc;
          }
-         section#network_section4 .blog_item {
-         padding: 15px 0px;
-         }
+    
          .box-shadow1 h2 {
          font-size: 18px;
          font-weight: 700;
@@ -182,13 +149,7 @@
          margin-top: 15px;
          padding: 10px;
          }
-         section#network_section6 h4 {
-         font-size: 18px;
-         color: #000;
-         }
-         section#network_section6 h4 a {
-         color: #000;
-         }
+        
          .image-faq img {
          width: 100%;
          border-top-right-radius: 100px;
@@ -206,40 +167,17 @@
          margin-left: auto;
          margin-right: auto;
          }
-         section#network_section5 h2 {
-         font-size: 38px;
-         color: #fff;
-         font-weight: 700;
-         }
+         
          .circle-image {
          padding-left: 35px;
          padding-bottom: 65px;
          background:#fff;
          }
-         section#network_section5 {
-         background-image: url('public/front/images/bg-img-2.jpg');
-         background-position: center;
-         background-size: cover;
-         background-repeat: no-repeat;
-         padding: 40px 0px;
-         }
+        
          div#myCarousel .col-lg-4.col-md-6 {
          padding: 0px;
          }
-         .test-bg {
-         background-image: url('public/front/images/testimonial-bg.png');
-         background-position: center;
-         background-size: cover;
-         background-repeat: no-repeat;
-         padding: 45px 25px;
-         }
-         section#network_section7 {
-         background-image: url('public/front/images/bg-img-3.jpg');
-         background-position: center;
-         background-size: cover;
-         background-repeat: no-repeat;
-         padding: 60px 0px;
-         }
+        
          .viewall-box.position-relative {
          width: 180px;
          background: #fff;
@@ -291,21 +229,14 @@
          span.span-head {
          font-weight: 800;
          }
-         section#network_section3 {
-         background-image: url('public/front/images/bg-img-1.jpg');
-         background-position: center;
-         background-size: cover;
-         background-repeat: no-repeat;
-         }
+         
          footer.tm-footer {
          padding-top: 60px; 
          }
          .tm-copyright {
          padding: 1px;
          }
-         section#network_section2,  section#network_section3, section#network_section4,section#network_section6, section#network_section8 {
-         padding: 60px 0px;
-         }
+         
          .net-heading {
          margin-bottom: 35px;
          }
@@ -355,18 +286,7 @@
          form.search-form {
          margin-top: 40px;
          }
-         .icon-down {
-         background-image: url('public/front/images/bg-icon-1.png');
-         width: 80px;
-         margin: auto;
-         position: absolute;
-         bottom: 0;
-         left: 0;
-         right: 0;
-         background-size: cover;
-         background-repeat: no-repeat;
-         text-align: center;
-         }
+ 
          .text-center.text-bg {
          margin-top: 150px;
          margin-bottom: 100px;
@@ -451,10 +371,12 @@
          top: 4px;
          }
          section#network_section1 {
-         background-image: url('public/front/images/hero-1.jpg');
+         background-image: url('public/images/cnsoon.jpeg');
          background-position: center;
          background-size: cover;
          background-repeat: no-repeat;
+		 height:83%;
+		 margin-top: 80px;
          }
 		 .hide{
           display:none !important;
@@ -479,12 +401,12 @@
                         <li><a href="{{url('/')}}" class="nav-item nav-link active">HOME</a></li>
                         <li><a href="#" class="nav-item nav-link">COMMUNITIES</a></li>
                         <li><a href="#" class="nav-item nav-link">COACH</a></li>
-                        <li><a href="#" class="nav-item nav-link">FAQ</a></li>
                         <li><a href="#" class="nav-item nav-link">TESTIMONIAL</a></li>
                         <li><a href="{{url('contactUs')}}" class="nav-item nav-link">CONTACT US</a></li>
                         @if(Auth::check())
                         <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#editModal">EDIT PROFILE</a></li>
                         <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#feedbackModal">SEND FEEDBACK</a></li>
+						<li><a href="{{url('/add-event')}}">EVENT</a></li>
                         <li><a href="{{url('/logout')}}" class="nav-item nav-link">Logout</a></li>
                               @else
                               <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>
@@ -502,83 +424,15 @@
 
 
 <section id="footer">
-         <footer class="tm-footer" style="background-image: url('public/front/images/footer-bg.jpg');" title="Footer Background">
-            <div class="tm-footer-contact-details">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="tm-footer-logo-social-sec">
-                           <div class="tm-footer-logo">
-                              <a href="#"><img src=<?php echo url('public/front/images/logo1.png'); ?> style="width: 251px;" alt="NAW Logo"></a>
-                           </div>
-                           <p class="demo">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.  </p>
-                           <ul class="tm-footer-social-icon">
-                              <li class="tm-footer-icon-facebook"><a href="" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                              <li class="tm-footer-icon-twitter"><a href="" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                              <li class="tm-footer-icon-linkedin"><a href="" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                           </ul>
-                        </div>
-                     </div>
-                     <div class="col-md-2">
-                        <div class="tm-footer-quick-links">
-                           <div class="tm-footer-quick-links-header">
-                              <h6>Quick Links</h6>
-                              <hr class="border-blue-1">
-                              <hr class="border-blue-2">
-                           </div>
-                           <ul class="footer_custom">
-                              <li><a target="_blank" href=""><i class="fa fa-hand-o-right"></i>Home</a></li>
-                              <li><a href=""><i class="fa fa-hand-o-right"></i>Communities</a></li>
-                              <li><a href=""><i class="fa fa-hand-o-right"></i>Coach</a></li>
-                              <li><a href=""><i class="fa fa-hand-o-right"></i>FAQ</a></li>
-                              <li><a href=""><i class="fa fa-hand-o-right"></i>Testimonial</a></li>
-                              <li><a href=""><i class="fa fa-hand-o-right"></i>Contact Us</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="tm-footer-quick-links">
-                           <div class="tm-footer-quick-links-header">
-                              <h6>Our Communities</h6>
-                              <hr class="border-blue-1">
-                              <hr class="border-blue-2">
-                           </div>
-                           <ul class="footer_custom">
-                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Business Growth </a></li>
-                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Professional Development</a></li>
-                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>How to build a relationhips</a></li>
-                              <li><a href="" target="_blank"><i class="fa fa-hand-o-right"></i>Professional Development</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="tm-footer-quick-links">
-                           <div class="tm-footer-quick-links-header">
-                              <h6>Newsletter SignUp</h6>
-                              <hr class="border-blue-1">
-                              <hr class="border-blue-2">
-                           </div>
-                           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                           <input type="text" name="" class="form-control" placeholder="Enter Your Email">
-                           <div class="btn-theme-bx">
-                              <a href="" class="">Submit Now</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <hr style="background: #fff;">
-            <div class="tm-copyright">
+        
+            <div class="tm-copyright" style="background: #000000a6;">
                <div class="container">
                   <div class="text-center">
                      <p class="demo">© 2020 Meet Away Website. All rights reserved.</p>
                   </div>
                </div>
             </div>
-         </footer>
+      
       </section>
      <!-- Edit Modal -->
 @if(Auth::check())

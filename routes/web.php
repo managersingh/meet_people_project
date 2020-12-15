@@ -30,4 +30,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/upload-image', 'HomeController@uploadImage');
     Route::post('/send-feedback', 'HomeController@sendFeedback');
     Route::get('/account-settings', 'HomeController@accountSettings');
+	Route::any('/add-event', 'EventController@AddEvent');
   });
