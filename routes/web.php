@@ -29,4 +29,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/edit-profile', 'HomeController@editProfile');
     Route::post('/upload-image', 'HomeController@uploadImage');
 	Route::any('/add-event', 'EventController@AddEvent');
+	Route::any('/list-event', 'EventController@EventShow');
   });
