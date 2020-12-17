@@ -8,7 +8,10 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+     <script src="{{ asset('public/js/app.js') }}" defer></script>
 
+     <!-- Styles -->
+    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 	  <style>
  
          button:focus {
@@ -385,6 +388,7 @@
       
    </head>
    <body>
+   <div  id="app">
       <header class="header">
          <div class="header-nav">
             <nav class="navbar navbar-expand-md navbar-light bg-color1">
@@ -433,6 +437,7 @@
             </div>
       
       </section>
+      </div>
      <!-- Edit Modal -->
 @if(Auth::check())
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -521,7 +526,7 @@
         <div class="row">
             <div class="col-md-12">
                <div class="form-group">
-               <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="short_bio" placeholder="Let us know..."></textarea>
+               <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="message" placeholder="Let us know..."></textarea>
                </div>
             </div>
         </div>
@@ -529,7 +534,7 @@
         <div class="row">
             <div class="col-md-12">
             <div class="form-group form-check">
-               <input type="checkbox" class="form-check-input" name="make_anonymous" id="makeAnonymous">
+               <input type="checkbox" class="form-check-input" name="make_anonymous" id="makeAnonymous" value="0">
                <label class="form-check-label" for="exampleCheck1">Make Anonymous</label>
             </div>
             </div>
@@ -541,7 +546,7 @@
       <div class="modal-footer">
          
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="feedbackSub" onclick="registerUser()">Submit</button>
+        <button type="button" class="btn btn-primary" id="feedbackSub" onclick="sendFeedback()">Submit</button>
       </div>
       </form>
     </div>
@@ -597,7 +602,7 @@
             }
          });
                   // This function deals with validation of the form fields
-                  $("#editProfileForm").validate({
+            $("#editProfileForm").validate({
                rules: {
                   first_name:"required",
                   last_name:"required",
@@ -642,7 +647,7 @@ console.log('image uploaded');
 
                
             })
-         //Save user info into DB
+         //Save profile info into DB
          function registerUser(){
             if($("#editProfileForm").valid())
             {
@@ -670,16 +675,55 @@ console.log('image uploaded');
                });
             }
          }
-
+         //To make feedback anonymous
          $("#makeAnonymous").click(function(){
             if ($(this).is(':checked')) {
                   $("#feedbackSub").text('Submit Anonymously');
                   $("#userName").addClass('hide');
+                  $(this).val(1);
             }else{
                $("#feedbackSub").text('Submit');
                $("#userName").removeClass('hide');
+               $(this).val(0);
             }
-         })
+         });
+         $("#feedbackForm").validate({
+               rules: {
+                  message:"required",
+               }
+            });
+         //save feedback info into DB
+         function sendFeedback(){
+            if($("#feedbackForm").valid())
+            {
+
+            $.ajax({
+               url: "{{url('/send-feedback')}}",
+               type: "post",
+               data: {is_anonymous: $("#makeAnonymous").val(),data:$("#feedbackForm").serialize()},
+               dataType: "json",
+               headers: {
+                  "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+               },
+               beforeSend: function() {
+               },
+               success: function(response) {
+                  if(response.success ==  true){
+                     $("#feedbackForm").find('.modal-body').html('');
+                     $("#feedbackModal").find('.modal-title').html('');
+                     $("#feedbackForm").find('.modal-body').html(response.message);
+                     $("#feedbackForm").find('.modal-body').addClass('text-center');
+                     $("#feedbackForm").find('.modal-footer').html('');
+                  }
+               },
+               error:function(error){
+                  alert(error.message);
+               }
+               });
+            }
+         }
+
+
       </script>
 	    <script>
     $(document).ready(function(){

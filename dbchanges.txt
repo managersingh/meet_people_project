@@ -1,0 +1,2 @@
+CREATE TABLE `meetaway`.`feedbacks` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `user_id` INT(11) NOT NULL , `is_anonymous` ENUM('0','1') NOT NULL DEFAULT '0' COMMENT '\'0\'=>\'not anonymous\',\'1\'=>\'anonymous\'' , `message` TEXT NOT NULL , `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `events` ADD `user_id` INT(11) NOT NULL AFTER `id`;

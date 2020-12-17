@@ -6,9 +6,9 @@ class VideoChatController extends Controller
 {
     public function index(Request $request) {
         $user = $request->user();
-        $others = \App\User::where('id', '!=', $user->id)->pluck('name', 'id');
+        $others = \App\User::where('id', '!=', $user->id)->pluck('first_name', 'id');
         return view('video_chat.index')->with([
-            'user' => collect($request->user()->only(['id', 'name'])),
+            'user' => collect($request->user()->only(['id', 'first_name'])),
             'others' => $others
         ]);
     }

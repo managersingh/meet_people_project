@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Feedback;
 
 class HomeController extends Controller
 {
@@ -88,5 +89,38 @@ class HomeController extends Controller
             return response()->json($response);
         }
 
+    }
+
+    public function sendFeedback(Request $request)
+    {
+        try{
+            $myValue=  array();
+            parse_str($request->data, $myValue);
+            $data = $myValue;
+
+            $feedback = new Feedback();
+            $feedback->user_id = Auth::user()->id;
+            $feedback->is_anonymous = $request->is_anonymous;
+            $feedback->message = $data['message'];
+            if($feedback->save()){
+                $response['success'] = true;
+                $response['message'] = '<h3>Thank You!</h3><br><h5>Enjoy the rest of your day!</h5>';
+                return response()->json($response);
+            }else{
+                $response['success'] ='error';
+                $response['message'] = 'Something went wrong.';
+                return response()->json($response);
+            }
+        }catch(Exception $error){
+            $response['success'] ='error';
+            $response['message'] = 'Something went wrong.';
+            return response()->json($response);
+        }
+
+    }
+
+    public function accountSettings()
+    {
+        return view('account_settings');
     }
 }
