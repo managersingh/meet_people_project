@@ -8,7 +8,10 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+     <script src="{{ asset('public/js/app.js') }}" defer></script>
 
+     <!-- Styles -->
+    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 	  <style>
  
          button:focus {
@@ -385,6 +388,7 @@
       
    </head>
    <body>
+   <div  id="app">
       <header class="header">
          <div class="header-nav">
             <nav class="navbar navbar-expand-md navbar-light bg-color1">
@@ -434,6 +438,7 @@
             </div>
       
       </section>
+      </div>
      <!-- Edit Modal -->
 @if(Auth::check())
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">

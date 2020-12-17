@@ -11,6 +11,7 @@ use App\User;
 use Session;
 use Redirect;
 use Helpers;
+use App\Attendee;
 
 class EventController extends Controller
 {
@@ -62,6 +63,7 @@ class EventController extends Controller
 			$image->move($destinationPath, $imageName);
           
             $eventData = array(
+				'user_id' => Auth::user()->id,
                 'event_name' => $eventName,
                 'event_image' => $imageName,
                 'timezone' => $timezone, 
@@ -80,8 +82,7 @@ class EventController extends Controller
             $eventRes = Common::insertData('events',$eventData);
 
             if($eventRes){
-                Session::flash('success', 'Event Added Successfully!');
-                return redirect::back();
+				return redirect('/manage-event/'.Common::makeHash($eventRes))->with('success','Event Added Successfully!');
             }else{
                 Session::flash('error', 'Event Addition failed!');
                 return redirect::back();
@@ -99,7 +100,69 @@ class EventController extends Controller
        // $AllData = Common::eventGallery();  
        // return view('admin.events.Event', compact('AllData'));
     // }
-	
+	//Manage Particular Event
+	public function manageEvent(Request $request,$id)
+	{
+		$eventId = Common::removeHash($id);
+		$eventData  = Common::getSingelData('events','id',$eventId);
+
+		$events  = Common::listingData(['user_id'=>Auth::user()->id,'id'=>$eventId],'events',['ticket_name'],'id','desc');
+		if(!empty($events)){
+			$getTicket = [];
+			foreach($events as $event)
+			{
+				$getTicket[] = explode(",",$event->ticket_name);
+			}
+			
+			$tickets = [];
+			foreach($getTicket as $ticket){
+				$tickets = $ticket;
+			}
+		}
+		return view('events.manageEvent',['eventData'=>$eventData,'tickets'=>$tickets]);
+	}
+	//get ticket for yourself for Event
+	public function getTicketForYourself(Request $request)
+	{
+
+		try{
+            $myValue=  array();
+            parse_str($request->data, $myValue);
+			$data = $myValue;
+			$attendee = new Attendee();
+			$attendee->user_id = Auth::user()->id;
+			$attendee->event_id = $data['event_id'];
+			$attendee->ticket = $data['ticket_name'];
+			if($attendee->save()){
+				$response['success'] ='true';
+				$response['message'] ='/overview/'.Common::makeHash($data['event_id']);
+				return response()->json($response);
+			}
+
+
+        }catch(Exception $error){
+            $response['success'] ='error';
+            $response['message'] ='Something went wrong.';
+            return response()->json($response);
+        }
+	}
+
+	public function overviewEvent(Request $request,$id)
+	{
+		$eventId = Common::removeHash($id);
+		$eventData  = Common::getSingelData('events','id',$eventId);
+		return view('events.overviewEvent',['eventData'=>$eventData]);
+	}
+
+	public function checkInEvent(Request $request,$id)
+	{
+		$eventId = Common::removeHash($id);
+		$eventData  = Common::getSingelData('events','id',$eventId);
+		return view('events.checkInEvent',['eventData'=>$eventData]);
+	}
+
+
+
 	
 	
 

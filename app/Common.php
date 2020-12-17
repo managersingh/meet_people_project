@@ -14,7 +14,7 @@ class Common extends Model
      *
      */
 	public static function insertData($table='',$dataSet=[]){
-		$insertData = DB::table($table)->insert($dataSet);	
+		$insertData = DB::table($table)->insertGetId($dataSet);	
 		if(!empty($insertData)){
 			return $insertData;	
 		}else{
@@ -79,6 +79,26 @@ class Common extends Model
         $deleteData = DB::table($table)->where($uId, $getId)->delete();
         if($deleteData){
         	return true;
+        }else{
+        	return false;	
+        } 
+    }
+
+    public static function makeHash($data = "") {
+        //encrypt  data
+        $encryptedData = encrypt($data);
+        if($encryptedData){
+        	return $encryptedData;
+        }else{
+        	return false;	
+        } 
+    }
+
+    public static function removeHash($data = "") {
+        //decrypt  data
+        $decryptedData = decrypt($data);
+        if($decryptedData){
+        	return $decryptedData;
         }else{
         	return false;	
         } 
