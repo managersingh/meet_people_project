@@ -403,14 +403,13 @@
                   <div class="navbar-nav">
                      <ul class="nav-list">
                         <li><a href="{{url('/')}}" class="nav-item nav-link active">HOME</a></li>
-                        <li><a href="#" class="nav-item nav-link">COMMUNITIES</a></li>
-                        <li><a href="#" class="nav-item nav-link">COACH</a></li>
-                        <li><a href="#" class="nav-item nav-link">TESTIMONIAL</a></li>
+						<li><a href="#" class="nav-item nav-link">TESTIMONIAL</a></li>
                         <li><a href="{{url('contactUs')}}" class="nav-item nav-link">CONTACT US</a></li>
                         @if(Auth::check())
+						<li><a href="{{url('/add-event')}}">EVENT</a></li>
                         <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#editModal">EDIT PROFILE</a></li>
                         <li><a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#feedbackModal">SEND FEEDBACK</a></li>
-						<li><a href="{{url('/add-event')}}">EVENT</a></li>
+						<li><a href="{{url('/list-event')}}">SHOW_EVENT</a></li>
                         <li><a href="{{url('/logout')}}" class="nav-item nav-link">Logout</a></li>
                               @else
                               <li><a href="{{url('/register')}}" class="nav-item nav-link btn-nav-ink">Create a Profile<span class="btn-bg"><i class="fa fa-long-arrow-right icon1"></i></span></a></li>

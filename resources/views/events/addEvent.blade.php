@@ -49,7 +49,7 @@
 				
 				<div class="form-group">
                   <label for="title">Duration</label>
-                  <select class="form-control" name="duration" required>
+                  <select class="form-control" id="duration" name="duration" required>
 				  <option value="">Select Time Duration</option>
 				  <option value="10 Min">10 Min</option>
 				  <option value="15 Min">15 Min</option>
@@ -77,9 +77,9 @@
 				 <a href=""><img src="<?php echo url('public/images/s2.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
 				 <a href=""><img src="<?php echo url('public/images/s3.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
 				 <a href=""><br><br><img src="<?php echo url('public/images/s4.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
-				 <a href=""><img src="<?php echo url('public/images/s6.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
 				 <a href=""> <img src="<?php echo url('public/images/s7.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
-				 <a href=""> <br><br><img src="<?php echo url('public/images/s8.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
+		        <a href=""><img src="<?php echo url('public/images/s6.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp; 		
+				<a href=""> <br><br><img src="<?php echo url('public/images/s8.jpg'); ?>" style="height: 100px;width: 200px;"></a>&nbsp;&nbsp;&nbsp;
 				 <a href=""><img src="<?php echo url('public/images/s9.jpg'); ?>" style="height: 100px;width: 200px;"></a>
 				 <input type="file" name="photo" style="height: 100px;width: 200px;" required="required"/>
                 </div>	
@@ -117,11 +117,11 @@
                             <div class="row">
                                
                                 <div class="input-group-btn">
-                                  <button class="btn btn-success" type="button" onclick="ticket_counter();"> 
+                                  <button class="btn btn-success" type="button" onclick="ticket_counter_free();"> 
                                     &nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true">&nbsp;Free Ticket</i>
                                   </button>
 								  
-								 <button class="btn btn-success" type="button" onclick="ticket_counter();"> 
+								 <button class="btn btn-success" type="button" onclick="ticket_counter_paid();"> 
                                     &nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true">&nbsp;Paid Ticket</i>
                                   </button>
                                 </div>
@@ -144,6 +144,7 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-git.js"></script>
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -152,15 +153,15 @@
 </script>
 
 <script type="text/javascript">
-      var room = 1;
-function ticket_counter() {
+var room = 1;
+function ticket_counter_free() {
  
     room++;
     var objTo = document.getElementById('ticket_counter')
     var divtest = document.createElement("div");
   divtest.setAttribute("class", "form-group removeclass"+room);
   var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="row"><div class="col-sm-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="tickets" name="tickets_name[]" value="" placeholder="Ticket Name"></div></div><i class="fa fa-dollar" style="margin-top: 8px;font-size: 18px;"></i><div class="col-sm-4 nopadding" style="padding-left: 0px"><div class="form-group"><input type="number" class="form-control" id="tickets" name="tickets_price[]" value="" placeholder="Ticket Price"></div></div><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="ticket_counter_remove('+ room +');"> <i class="fa fa-close" aria-hidden="true"></i> </button></div><div class="clear"></div></div>';
+    divtest.innerHTML = '<div class="row"><div class="col-sm-6 nopadding"><div class="form-group"><input type="hidden" class="form-control" id="tickets" name="tickets_status[]" value="0"> <input type="text" class="form-control" id="tickets" name="tickets_name[]" value="" placeholder="Ticket Name" required></div></div><i class="fa fa-dollar" style="margin-top: 8px;font-size: 18px;"></i><div class="col-sm-4 nopadding" style="padding-left: 0px"><div class="form-group"><input type="number" class="form-control" id="tickets" name="tickets_price[]" value="" placeholder="Ticket Price" required></div></div><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="ticket_counter_remove('+ room +');"> <i class="fa fa-close" aria-hidden="true"></i> </button></div><div class="clear"></div></div>';
     
     objTo.appendChild(divtest)
 }
@@ -168,4 +169,31 @@ function ticket_counter() {
      $('.removeclass'+rid).remove();
    }
 </script>
+
+<script type="text/javascript">
+var room = 1;
+function ticket_counter_paid() {
+ 
+    room++;
+    var objTo = document.getElementById('ticket_counter')
+    var divtest = document.createElement("div");
+  divtest.setAttribute("class", "form-group removeclass"+room);
+  var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="row"><div class="col-sm-6 nopadding"><div class="form-group"><input type="hidden" class="form-control" id="tickets" name="tickets_status[]" value="1"> <input type="text" class="form-control" id="tickets" name="tickets_name[]" value="" placeholder="Ticket Name" required></div></div><i class="fa fa-dollar" style="margin-top: 8px;font-size: 18px;"></i><div class="col-sm-4 nopadding" style="padding-left: 0px"><div class="form-group"><input type="number" class="form-control" id="tickets" name="tickets_price[]" value="" placeholder="Ticket Price" required></div></div><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="ticket_counter_remove('+ room +');"> <i class="fa fa-close" aria-hidden="true"></i> </button></div><div class="clear"></div></div>';
+    
+    objTo.appendChild(divtest)
+}
+   function ticket_counter_remove(rid) {
+     $('.removeclass'+rid).remove();
+   }
+</script>
+
+<script type="text/javascript">
+
+   // $(document).on('change','#duration',function(){
+    // var value=$(this).val();
+    // alert(value)
+  // });
+</script>
+
 @endsection

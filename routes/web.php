@@ -37,4 +37,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::any('/check-in/{id}', 'EventController@checkInEvent');
     Route::any('/check-in/webcam/{id}', 'EventController@checkInWebcam');
 
+	Route::any('/add-event', 'EventController@AddEvent');
+	Route::any('/list-event', 'EventController@EventShow');
   });

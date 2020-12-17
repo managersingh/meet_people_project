@@ -8,6 +8,7 @@ use DB;
 use Validator;
 use App\Common;
 use App\User;
+use App\Events;
 use Session;
 use Redirect;
 use Helpers;
@@ -22,7 +23,6 @@ class EventController extends Controller
     {
        $title = "Add Event";
 	   if ($request->isMethod('post')) {
-
 		$photo = $request->file('photo');
         $eventName = $request->event_name;
 		$s_date = $request->s_date;
@@ -33,12 +33,7 @@ class EventController extends Controller
         $org_name = $request->org_name;
 		$org_desc = $request->org_desc;
 		$privacy_setting = $request->privacy_setting;
-		$tickets_name = $request->tickets_name;
-		$tickets_price = $request->tickets_price;
-		$tickets_price_new =implode(",",$tickets_price);
-		$tickets_name_new =implode(",",$tickets_name);
 
-		
 		$rules = array(
             'event_name' => 'required',
             'photo' => 'required',
@@ -73,14 +68,33 @@ class EventController extends Controller
 				'start_time' => $s_time,
 				'organizer_name' => $org_name, 
 				'organizer_desc' => $org_desc,
-				'privacy_setting' => $privacy_setting,
-				'ticket_name' => $tickets_name_new,
-				'ticket_price' => $tickets_price_new	
-					
-				
+				'privacy_setting' => $privacy_setting,	
             );
-            $eventRes = Common::insertData('events',$eventData);
-
+			
+			$eventRes = Events::create($eventData);
+			$eventID=$eventRes->id;
+			if(!empty($request->tickets_name))
+			{
+				    $tickets_status_data = $request->tickets_status;
+					$tickets_name_data = $request->tickets_name;
+					$tickets_price_data = $request->tickets_price;
+					$free_tickets = array_combine($tickets_name_data, $tickets_price_data);
+					$i=0;
+					foreach($free_tickets as $key => $value)
+					{ 
+					   $eventTicket = array(
+					   'event_id' => $eventID,
+					   'ticket_name' => $key,
+					   'ticket_price' => $value,
+					   'ticket_status' => $tickets_status_data[$i]				   
+					);
+					
+					$i++;
+					  $eventTicketRecord = Common::insertData('events_tickets',$eventTicket);
+					}
+		
+			}
+		
             if($eventRes){
 				return redirect('/manage-event/'.Common::makeHash($eventRes))->with('success','Event Added Successfully!');
             }else{
@@ -163,6 +177,12 @@ class EventController extends Controller
 
 
 
+	public function EventShow(){
+       $AllDatax = Events::All();
+	   
+       return view('events.Event', compact('AllDatax'));
+    }
+	
 	
 	
 
