@@ -30,4 +30,13 @@ class VideoChatController extends Controller
             $pusher->presence_auth($channel_name, $socket_id, $user->id)
         );
     }
+
+    public function checkInWebcam(Request $request) {
+        $user = $request->user();
+        $others = \App\User::where('id', '!=', $user->id)->pluck('first_name', 'id');
+        return view('events.checkInWebcam')->with([
+            'user' => collect($request->user()->only(['id', 'first_name'])),
+            'others' => $others
+        ]);
+    }
 }

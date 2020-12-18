@@ -133,6 +133,7 @@ class EventController extends Controller
 				$tickets = $ticket;
 			}
 		}
+
 		return view('events.manageEvent',['eventData'=>$eventData,'tickets'=>$tickets]);
 	}
 	//get ticket for yourself for Event
@@ -181,7 +182,14 @@ class EventController extends Controller
        $AllDatax = Events::All();
 	   
        return view('events.Event', compact('AllDatax'));
-    }
+	}
+	
+	public function checkInWebcam(Request $request,$id)
+	{
+		$eventId = Common::removeHash($id);
+		$eventData  = Common::getSingelData('events','id',$eventId);
+		return view('events.checkInWebcam',['eventData'=>$eventData]);
+	}
 	
 	
 	

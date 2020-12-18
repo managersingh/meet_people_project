@@ -2106,6 +2106,241 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WebCam.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WebCam.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pusher_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var simple_peer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! simple-peer */ "./node_modules/simple-peer/index.js");
+/* harmony import */ var simple_peer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(simple_peer__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'others', 'pusherKey', 'pusherCluster'],
+  data: function data() {
+    return {
+      channel: null,
+      stream: null,
+      peers: {},
+      status: 'default',
+      getVideoDevice: [],
+      getAudioInput: [],
+      getAudioOutput: []
+    };
+  },
+  mounted: function mounted() {
+    this.getPermissions();
+  },
+  methods: {
+    startVideoChat: function startVideoChat(userId) {
+      this.getPeer(userId, true);
+    },
+    getPermissions: function getPermissions() {
+      var _this = this;
+
+      var vm = this;
+      navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+      }).then(function () {
+        var stream = navigator.mediaDevices.enumerateDevices().then(function (devices) {
+          devices.forEach(function (device) {
+            if (device.kind == 'videoinput') {
+              vm.getVideoDevice.push({
+                'kind': device.kind,
+                'label': device.label
+              });
+            }
+
+            if (device.kind == 'audioinput') {
+              vm.getAudioInput.push({
+                'kind': device.kind,
+                'label': device.label
+              });
+            }
+
+            if (device.kind == 'audiooutput') {
+              vm.getAudioOutput.push({
+                'kind': device.kind,
+                'label': device.label
+              });
+            }
+
+            console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
+          });
+        })["catch"](function (err) {
+          console.log(err.name + ": " + err.message);
+        });
+      }, function (err) {
+        console.log(err);
+        _this.status = err.message;
+      });
+    },
+    getPeer: function getPeer(userId, initiator) {
+      var _this2 = this;
+
+      if (this.peers[userId] === undefined) {
+        var peer = new simple_peer__WEBPACK_IMPORTED_MODULE_2___default.a({
+          initiator: initiator,
+          stream: this.stream,
+          trickle: false
+        });
+        peer.on('signal', function (data) {
+          _this2.channel.trigger("client-signal-".concat(userId), {
+            userId: _this2.user.id,
+            data: data
+          });
+        }).on('stream', function (stream) {
+          var videoThere = _this2.$refs['video-there'];
+          videoThere.srcObject = stream;
+        }).on('close', function () {
+          var peer = _this2.peers[userId];
+
+          if (peer !== undefined) {
+            peer.destroy();
+          }
+
+          delete _this2.peers[userId];
+        });
+        this.peers[userId] = peer;
+      }
+
+      return this.peers[userId];
+    },
+    setupVideoChat: function setupVideoChat() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var stream, videoHere, pusher;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return navigator.mediaDevices.getUserMedia({
+                  video: true,
+                  audio: true
+                });
+
+              case 2:
+                stream = _context.sent;
+                videoHere = _this3.$refs['video-here'];
+                videoHere.srcObject = stream;
+                _this3.stream = stream;
+                pusher = _this3.getPusherInstance();
+                _this3.channel = pusher.subscribe('presence-video-chat');
+
+                _this3.channel.bind("client-signal-".concat(_this3.user.id), function (signal) {
+                  var peer = _this3.getPeer(signal.userId, false);
+
+                  peer.signal(signal.data);
+                });
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getPusherInstance: function getPusherInstance() {
+      return new pusher_js__WEBPACK_IMPORTED_MODULE_1___default.a(this.pusherKey, {
+        authEndpoint: '/auth/video_chat',
+        cluster: this.pusherCluster,
+        auth: {
+          headers: {
+            'X-CSRF-Token': document.head.querySelector('meta[name="csrf-token"]').content
+          }
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -52028,6 +52263,173 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WebCam.vue?vue&type=template&id=607456f4&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WebCam.vue?vue&type=template&id=607456f4& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      {
+        staticClass: "row justify-content-center",
+        staticStyle: { "margin-top": "80px" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticStyle: {
+              "margin-bottom": "30px",
+              "margin-top": "30px",
+              "z-index": "2",
+              height: "478px",
+              top: "250px",
+              "background-color": "rgb(255, 255, 255)",
+              width: "761px",
+              left: "0px"
+            }
+          },
+          [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getPermissions()
+                    }
+                  }
+                },
+                [_vm._v("Start streaming")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                  _vm._v("Camera")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  { staticClass: "form-control" },
+                  _vm._l(_vm.getVideoDevice, function(device) {
+                    return _c(
+                      "option",
+                      { key: device.kind, domProps: { value: device.label } },
+                      [_vm._v(_vm._s(device.label))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group " }, [
+                  _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                    _vm._v("Microphone")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    { staticClass: "form-control" },
+                    _vm._l(_vm.getAudioInput, function(audio) {
+                      return _c(
+                        "option",
+                        { key: audio.kind, domProps: { value: audio.label } },
+                        [_vm._v(_vm._s(audio.label))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                    _vm._v("Speakers")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    { staticClass: "form-control" },
+                    _vm._l(_vm.getAudioOutput, function(audioOut) {
+                      return _c(
+                        "option",
+                        {
+                          key: audioOut.kind,
+                          domProps: { value: audioOut.label }
+                        },
+                        [_vm._v(_vm._s(audioOut.label))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("audio", { attrs: { controls: "" } }, [
+          _c("source", {
+            attrs: {
+              src: "http://meetme.com/public/audio/check-sound.05f349e8.mp3",
+              type: "audio/mpeg"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "email", placeholder: "name@example.com" }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -64217,6 +64619,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('video-chat', __webpack_require__(/*! ./components/VideoChat.vue */ "./resources/js/components/VideoChat.vue")["default"]);
+Vue.component('web-cam', __webpack_require__(/*! ./components/WebCam.vue */ "./resources/js/components/WebCam.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -64425,6 +64828,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VideoChat_vue_vue_type_template_id_737f9f18___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VideoChat_vue_vue_type_template_id_737f9f18___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/WebCam.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/WebCam.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WebCam.vue?vue&type=template&id=607456f4& */ "./resources/js/components/WebCam.vue?vue&type=template&id=607456f4&");
+/* harmony import */ var _WebCam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WebCam.vue?vue&type=script&lang=js& */ "./resources/js/components/WebCam.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WebCam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/WebCam.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/WebCam.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/WebCam.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WebCam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./WebCam.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WebCam.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WebCam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/WebCam.vue?vue&type=template&id=607456f4&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/WebCam.vue?vue&type=template&id=607456f4& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WebCam.vue?vue&type=template&id=607456f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WebCam.vue?vue&type=template&id=607456f4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WebCam_vue_vue_type_template_id_607456f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

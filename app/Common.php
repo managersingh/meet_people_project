@@ -84,9 +84,9 @@ class Common extends Model
         } 
     }
 
-    public static function makeHash($data = "") {
+    public static function makeHash($id = "") {
         //encrypt  data
-        $encryptedData = encrypt($data);
+        $encryptedData = encrypt($id);
         if($encryptedData){
         	return $encryptedData;
         }else{
@@ -94,9 +94,9 @@ class Common extends Model
         } 
     }
 
-    public static function removeHash($data = "") {
+    public static function removeHash($id = "") {
         //decrypt  data
-        $decryptedData = decrypt($data);
+        $decryptedData = decrypt($id);
         if($decryptedData){
         	return $decryptedData;
         }else{
