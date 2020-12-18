@@ -15,6 +15,7 @@
 		foreach($AllDatax as $AllData)
 		{
 		?>
+		<a href="{{url('/manage-event')}}/{{encrypt($AllData->id)}}">
     <div class="row" style="border: 2px solid;margin-bottom: 18px;">
         <div class="col-lg-5 col-md-5">
             <figure class="sproduct-image">
@@ -34,7 +35,8 @@
 					<div class="sp-price">Privacy Setting: <span class="txt-red"><?php echo $AllData->privacy_setting; ?></span></div>
 			</div>	
 		</div>
-	</div>	
+	</div>
+	</a>	
 
 <!-- END PDF SECTION -->
 

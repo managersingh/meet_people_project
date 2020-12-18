@@ -8,8 +8,10 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" href="{{ asset('public/front/css/owl.carousel.min.css') }}">
 	  <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+     <script src="{{asset('public/front/js/jquery-3.4.1.min.js')}}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
      <script src="{{ asset('public/js/app.js') }}" defer></script>
-
+     <script src="{{ asset('public/js/custom.js') }}"></script>
      <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 	  <style>
@@ -24,7 +26,7 @@
          color: #fff;
          }
          .button-box {
-         background-image: url('public/front/images/bg-icon-2.png');
+         background-image: url('front/images/bg-icon-2.png');
          background-position: center;
          background-size: contain;
          background-repeat: no-repeat;
@@ -374,7 +376,7 @@
          top: 4px;
          }
          section#network_section1 {
-         background-image: url('public/images/cnsoon.jpeg');
+         background-image: url('images/cnsoon.jpeg');
          background-position: center;
          background-size: cover;
          background-repeat: no-repeat;

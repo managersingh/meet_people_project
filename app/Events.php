@@ -16,7 +16,7 @@ class Events extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'event_name', 'event_image', 'event_desc','timezone', 'time_duration','start_date', 'start_time','organizer_name', 'organizer_desc','privacy_setting'
+        'user_id','event_name', 'event_image', 'event_desc','timezone', 'time_duration','start_date', 'start_time','organizer_name', 'organizer_desc','privacy_setting'
     ];
 
 }
